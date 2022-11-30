@@ -56,7 +56,16 @@ module.exports.login = async (req) => {
       const token = await jsonwt.sign(payload, process.env.JWT_SECRET, {
         expiresIn: parseInt(process.env.JWT_EXPIRE),
       });
-      return { message: "Login Succesfull", token: token };
+      return {
+        message: "Login Succesfull",
+        name: checkUser.name,
+        email: checkUser.email,
+        areacode: checkUser.areacode,
+        address: checkUser.address,
+        mobile: checkUser.mobile,
+        date: checkUser.data,
+        token: token,
+      };
     } else {
       return { error: "Incorrect Credientials" };
     }
