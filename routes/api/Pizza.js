@@ -43,4 +43,8 @@ router.get("/showCart", PizzaController.showCart);
 // @require
 router.get("/MakePizza", PizzaController.MakePizza);
 
+router.post("/removeCart", PizzaController.removeCart);
+
+router.post("/addIngredients", PizzaController.addIngredients);
+
 module.exports = router;

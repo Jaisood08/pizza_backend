@@ -43,7 +43,7 @@ module.exports.showCart = async (req, res, next) => {
   if (data.length != 0) {
     res.status(200).send({ error: null, data: data });
   } else {
-    res.status(500).send({ error: true });
+    res.status(200).send({ error: true, data: [] });
   }
 };
 
@@ -55,6 +55,30 @@ module.exports.MakePizza = async (req, res, next) => {
   if (Auth.error) return res.status(401).send({ error: Auth.error });
 
   const data = await PizzaServices.MakePizza(req);
+  if (data.length != 0) {
+    res.status(200).send({ error: null, data: data });
+  } else {
+    res.status(500).send({ error: true });
+  }
+};
+
+module.exports.removeCart = async (req, res, next) => {
+  const Auth = await Authenticate(req, res, next);
+  if (Auth.error) return res.status(401).send({ error: Auth.error });
+
+  const data = await PizzaServices.removeCart(req);
+  if (data.length != 0) {
+    res.status(200).send({ error: null, data: data });
+  } else {
+    res.status(500).send({ error: true });
+  }
+};
+
+module.exports.addIngredients = async (req, res, next) => {
+  const Auth = await Authenticate(req, res, next);
+  if (Auth.error) return res.status(401).send({ error: Auth.error });
+
+  const data = await PizzaServices.addIngredients(req);
   if (data.length != 0) {
     res.status(200).send({ error: null, data: data });
   } else {
